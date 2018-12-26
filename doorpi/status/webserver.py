@@ -138,7 +138,7 @@ class DoorPiWeb(ThreadingMixIn, HTTPServer):
         self.loginfile = doorpi.DoorPi().config.get_string_parsed(DOORPIWEB_SECTION, 'loginfile', 'login.html')
         self.area_public_name = doorpi.DoorPi().config.get_string_parsed(DOORPIWEB_SECTION, 'public', 'AREA_public')
         # https://raw.githubusercontent.com/motom001/DoorPiWeb/master/ or http://motom001.github.io/DoorPiWeb/
-        self.online_fallback = doorpi.DoorPi().config.get_string_parsed(DOORPIWEB_SECTION, 'online_fallback', 'http://motom001.github.io/DoorPiWeb')
+        self.online_fallback = doorpi.DoorPi().config.get_string_parsed(DOORPIWEB_SECTION, 'online_fallback', 'http://RowanZee.github.io/DoorPiWeb')
         check_config(self.config)
 
         doorpi.DoorPi().event_handler.register_action('OnWebServerStart', WebServerStartupAction(self.handle_while_not_shutdown))
