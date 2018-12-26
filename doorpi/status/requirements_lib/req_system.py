@@ -47,7 +47,7 @@ REQUIREMENT = dict(
             text_description =      '''
 Das Python-Modul logging wird in DoorPi genutzt um die Log-Ausgaben, also die Status-Meldungen von DoorPi, an die gewünschten Stellen zu schreiben.
 Im Anwendungsmodus wird keine Log-Datei geschrieben, sondern nur die Log-Ausgabe am Bildschrim angezeigt.
-Im Daemon-Modus allerdings wird eine Log-Datei geschrieben (<a href="https://github.com/motom001/DoorPi/blob/master/doorpi/main.py#L15">/var/log/doorpi/doorpi.log</a>)
+Im Daemon-Modus allerdings wird eine Log-Datei geschrieben (<a href="https://github.com/RowanZee/DoorPi/blob/master/doorpi/main.py#L15">/var/log/doorpi/doorpi.log</a>)
 Die maximale Größe der Logdatei ist auf 50000 Bytes festgelegt. Danach wird die Log-Datei umbenannt (Backup der Log) und eine neue geschrieben.
 Es gibt jedoch max. die 10 letzten Log-Dateien - alle älteren werden verworfen.
 ''',
