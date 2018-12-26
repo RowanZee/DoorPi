@@ -9,9 +9,9 @@ from doorpi.status.webserver import DOORPIWEB_SECTION, CONF_AREA_PREFIX
 
 REQUIREMENT = dict(
     fulfilled_with_one = False,
-    text_description = '''Der Webserver ist Kontroll- und Konfiguration- Oberfläche sowie die Schnittstelle per Webservice.
-Es können Dateien angefragt werden (z.B. index.html) die aus dem Dateisystem geladen werden (reale Resourcen).
-Genausogut können aber auch Status Abfragen oder Control Kommandos verarbeitet werden (virtuelle Resourcen).
+    text_description = '''The web server is the control and configuration interface as well as the interface via web service.
+Files can be requested (eg index.html) which are loaded from the file system (real resources).
+But it is also possible to process status queries or control commands (virtual resources).
 
 Der Benutzer wird vorranging nur reale Resourcen aufrufen, die sich den angezeigten Status über virtuelle Resourcen "nachladen".
 
