@@ -129,7 +129,7 @@ Außerdem muss bei Bestellungen darauf geachtet werden, dass es zwei Versionen g
         'serial': dict(
             text_warning =          '',
             text_description =      '''
-Hier die Beschreibung aus der <a href="https://github.com/motom001/DoorPi/blob/master/doorpi/keyboard/from_rdm6300.py">from_rdm6300.py</a>, die <a href="https://github.com/msmolny">msmolny</a> netterweise erstellt hat.
+Hier die Beschreibung aus der <a href="https://github.com/RowanZee/DoorPi/blob/master/doorpi/keyboard/from_rdm6300.py">from_rdm6300.py</a>, die <a href="https://github.com/msmolny">msmolny</a> netterweise erstellt hat.
 
 <pre>
   Configuration
