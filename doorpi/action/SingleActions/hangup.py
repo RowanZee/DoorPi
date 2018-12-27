@@ -12,7 +12,7 @@ from time import sleep
 
 def hangup(waittime):
     logger.trace("hangup requested")
-    if waittime > 0:
+    if waittime > 2:
         logger.debug("Waiting %s seconds before sending hangup request", waittime)
         sleep(float(waittime))
     return doorpi.DoorPi().sipphone.hangup()
