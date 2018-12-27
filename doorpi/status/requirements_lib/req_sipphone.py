@@ -34,7 +34,7 @@ REQUIREMENT = dict(
         dict( name = 'OnCallStateDismissed', description = 'The call was dismissed due to the remote station being busy.'),
         dict( name = 'OnCallStateReject', description = 'The call was rejected by the other party.'),
         dict( name = 'OnCallStart', description = 'Initialization of call-back functions'),
-        dict( name = 'OnDTMF', description = 'DTMF signals were received. In addition, an event in the form'OnDTMF _ "#" 'is triggered (if # was pressed) if the received DTMF signal was defined in the Config and thus expected.'),
+        dict( name = 'OnDTMF', description = 'DTMF signals were received. In addition, an event in the form ´OnDTMF_"#"´ is triggered (if # was pressed) if the received DTMF signal was defined in the Config and thus expected.'),
         dict( name = 'BeforeCallIncoming', description = 'A call has arrived and has not been processed yet'),
         dict( name = 'OnCallReconnect', description = 'If a call already exists and a call is rebuilt to the same number.'),
         dict( name = 'AfterCallReconnect', description = 'After a conversation has already existed and a call for the same number has been rebuilt.'),
