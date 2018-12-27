@@ -15,6 +15,7 @@ Introduction
 The goal of the project DoorPi is to control a door intercom by means of a single-board computer such as the Raspberry Pi and the communication protocol VoIP.
 
 DoorPi is an event-action based system. There are components that trigger events and components that respond because of these events. For this purpose, events such as "pressing a doorbell" or "RFID Chip xyz held" triggers actions (Actions) such as "call on phone xyz", "e-mail to xxx" or "open door".
+
 ---------------
 Event Sources
 ---------------
