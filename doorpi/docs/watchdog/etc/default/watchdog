@@ -2,6 +2,6 @@
 run_watchdog=1
 # Load module before starting watchdog
 watchdog_module="bcm2708_wdog"
-# Specify additional watchdog options here (see manpage).
+# Specify additional watchdog options here (see manpage). 
 
 #watchdog_options="-v"
