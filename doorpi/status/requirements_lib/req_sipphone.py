@@ -45,7 +45,7 @@ REQUIREMENT = dict(
         dict( name = 'OnCallReject', description = 'Before an incoming call is rejected (no admin number)'),
         dict( name = 'AfterCallReject', description = 'After an incoming call has been rejected (no admin number)'),
         dict( name = 'OnPlayerStarted', description = 'The playback of the DialTone has started'),
-        dict( name = 'OnPlayerStopped', description = 'The playback of the DialTone has stopped),
+        dict( name = 'OnPlayerStopped', description = 'The playback of the DialTone has stopped'),
         dict( name = 'OnRecorderStarted', description = 'The recording of the conversation has started'),
         dict( name = 'OnRecorderStopped', description = 'The recording of the conversation has stopped'),
         dict( name = 'OnRecorderCreated', description = 'Recorder has been created a recorder and is ready to record calls.')
