@@ -79,3 +79,28 @@ Link to forums with DoorPi articles (German articles):
 `[Home Care] DoorPi (VoIP Intercom / Door phone with Video-Support) <http://www.forum-raspberrypi.de/Thread-haussteuerung-doorpi-voip-wechselsprechanlage-tuersprechanlage-mit-video-support>`_
 
 `DoorPI / VoIP Door-Intercom with Raspberry Pi <http://www.ip-symcon.de/forum/threads/26739-DoorPI-VoIP-Door-Intercomstation-with-Raspberry-Pi>`_
+
+=============
+Changelog
+=============
+
+see `changelog.txt <https://github.com/motom001/DoorPi/blob/master/changelog.txt>`_
+
+
+.. |travis_status_master| image:: https://travis-ci.org/motom001/DoorPi.svg?branch=master
+    :target: https://travis-ci.org/motom001/DoorPi
+
+.. |scrutinizer_status_master| image:: https://codeclimate.com/github/motom001/DoorPi/badges/gpa.svg
+   :target: https://codeclimate.com/github/motom001/DoorPi
+   :alt: Code Climate
+
+.. |code_climate_badge| image:: https://scrutinizer-ci.com/g/motom001/DoorPi/badges/quality-score.png?b=master
+   :target: https://scrutinizer-ci.com/g/motom001/DoorPi/
+   
+.. |pypi_License| image:: https://img.shields.io/pypi/l/DoorPi.svg
+    :target: https://creativecommons.org/licenses/by-nc/4.0/
+    :alt: CC BY-NC 4.0
+
+.. |pypi_latest_version| image:: https://img.shields.io/pypi/v/DoorPi.svg?label=latest%20version
+    :target: https://pypi.python.org/pypi/DoorPi
+    :alt: Download
