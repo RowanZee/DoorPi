@@ -67,7 +67,7 @@ Meanwhile, there is also video support so that a camera can be installed on the 
 Installation
 -----------------
 
-The installation is described here `http://www.doorpi.org/forum/board/21-installation/>` (German thread)
+The installation is described `here <http://www.doorpi.org/forum/board/21-installation/>`_ (German thread)
 
 -----------------
 DoorPi-Help 
