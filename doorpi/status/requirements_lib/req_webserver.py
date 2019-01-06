@@ -13,46 +13,46 @@ REQUIREMENT = dict(
 Files can be requested (eg index.html) which are loaded from the file system (real resources).
 But it is also possible to process status queries or control commands (virtual resources).
 
-Der Benutzer wird vorranging nur reale Resourcen aufrufen, die sich den angezeigten Status über virtuelle Resourcen "nachladen".
+The user will primarily call only real resources that "reload" the displayed status via virtual resources.
 
-Wenn es um eine Weboberfläche geht, dann sollte diese auch abgesichert sein.
-Dazu gibt es Nutzer (User) die in Gruppen (Groups) zusammengefasst sind.
-Diesen Groups sind  Bereiche (AREA) zugeteilt, die lesend oder schreibend genutzt werden können.
-Die Bereiche (AREA) sind virtuelle und reale Ressourcen, die sich speziell an der URL unterscheiden (daher kam auch die Idee es in Bereiche einzuteilen).
-Die Bestandteile eines Bereiches werden mittels RegEx definiert.
+If it comes to a web interface, then this should also be secured.
+There are users (users) that are grouped in groups.
+These groups are assigned areas (AREA) that can be used for reading or writing.
+The areas (AREA) are virtual and real resources that differ specifically in the URL (hence the idea to divide it into areas).
+The components of an area are defined by RegEx.
 
-Zuordnung in der Sektion User ist:
-[Benutzername] = [Passwort]
+Assignment in the User section is:
+[Username] = [password]
 
-Bei der Group Sektion ist es:
-[GroupName] = [Benutzername1],[Benutzername2],[...]
+At the group section it is:
+[GroupName] = [username1], [username2], [...]
 
-Dann gibt es die beiden Sektionen WritePermission und ReadPermission mit der Zuordnung:
+Then there are the two sections WritePermission and ReadPermission with the assignment:
 [GroupName] = [AreaName]
 
-Ganz unten gibt es dann beliebig viele Areas mit unterschiedlichen Namen. Jeder Area sind RegEx zugeordnet, die gegen die URL geprüft werden.
-Eine Sonderform ist die AREA_public. Diese fasst alle Ressourcen zusammen, die von jedem eingesehen werden dürfen, da es sich hierbei um Javascript,CSS und ähnliche Dateien handelt.
-Nötig wurde das, da die login.html auch Javascript-Dateien geladen hatte. Mitlerweile habe ich mich von der login.html einw enig verabschiedet und bin Richtung HTTP Status-Code 401 mit base64 codiertem Passwort gegangen. Das lässt sich später auch automatisch durchführen, so dass Webservice-Aktionen mit Authentifizierung auf einem sehr einfachen standardisierten Level möglich sind.
+At the bottom there are any number of areas with different names. Each area is assigned RegEx, which are checked against the URL.
+A special form is the AREA_public. It summarizes all the resources that anyone can view, since they are Javascript, CSS and similar files.
+This was necessary because the login.html had also loaded Javascript files. Mitlerweile I have adopted by the login.html einw enig and I have gone towards HTTP status code 401 with base64 coded password. This can also be done automatically later, so that web service actions with authentication are possible on a very simple standardized level.
 
-Beispiel:
+Example
 <code>
 ['''+DOORPIWEB_SECTION+''']
-public = AREA_public # das sind alle Resourcen die jeder sehen darf, auch wenn er sich nicht authentifiziert hat
+public = AREA_public # These are all resources that anyone can see, even if they have not authenticated themselves
 
 [User]
-door = pi # Benutzer door mit dem Passwort pi
+door = pi # User door with the password pi
 
 [Group]
-administrator = door # Benutzer door ist Mitglied der Gruppe administrator
+administrator = door # User door is a member of the group administrator
 
 [WritePermission]
-administrator = dashboard # Gruppe administrator darf schreibend auf die Resourcen dashboard zugreifen (Sektion "'''+CONF_AREA_PREFIX+'''dashboard")
+administrator = dashboard # Group administrator can write access to the resources dashboard (Section "'''+CONF_AREA_PREFIX+'''dashboard")
 
 [ReadPermission]
-administrator = status, help # Gruppe administrator darf lesend auf die Resourcen status (Sektion "'''+CONF_AREA_PREFIX+'''status") und help (Sektion "'''+CONF_AREA_PREFIX+'''help") zugreifen
+administrator = status, help # Group administrator is allowed to read the resource status (Section "'''+CONF_AREA_PREFIX+'''status") and help (Section "'''+CONF_AREA_PREFIX+'''help") access
 
 ['''+CONF_AREA_PREFIX+'''status]
-/status # alle URL's die mit "/status" übereinstimmen (Parameter der URL sind dabei egal - so ist z.B. "/status?output=plain" möglich)
+/status # all URLs that match "/status" (Parameters of the URL do not matter - for example, "/status?output=plain")
 /mirror
 
 ['''+CONF_AREA_PREFIX+'''dashboard]
@@ -71,27 +71,27 @@ administrator = status, help # Gruppe administrator darf lesend auf die Resource
 </code>
 ''',
     events = [
-        dict( name = 'OnWebServerStart', description = 'Der Webserver ist gestartet. Somit stehen die Webservices und die Weboberfläche zur Verfügung. Standardmäßig wird Port 80 benutzt (Parameter ip und port)'),
-        dict( name = 'OnWebServerStop', description = 'Der Webserver soll gestoppt werden. Ab diesem Zeitpunkt werden keine neuen Anfragen bearbeitet.'),
-        dict( name = 'WebServerCreateNewSession', description = 'Es hat sich ein Nutzer angemeldet, der seit dem Start von DoorPi noch angemeldet war.'),
-        dict( name = 'WebServerAuthUnknownUser', description = 'Es wurde versucht sich mit einem Benutzer anzumelden, der nicht bekannt ist.'),
-        dict( name = 'WebServerAuthWrongPassword', description = 'Für einen existierenden Benutzer wurde ein falsches Passwort übermittelt.'),
-        dict( name = 'OnWebServerRequest', description = 'Es wurde eine Anfrage an den Webserver gestellt - dabei ist egal ob per GET oder POST'),
-        dict( name = 'OnWebServerRequestGet', description = 'Es wurde eine GET-Anfrage an den Webserver gestellt'),
-        dict( name = 'OnWebServerRequestPost', description = 'Es wurde eine POST-Anfrage an den Webserver gestellt'),
-        dict( name = 'OnWebServerVirtualResource', description = 'Es wurde eine Anfrage an den Webserver gestellt, die auf eine virtuelle Resource zeigt (z.B. Webservice erfordert JSON-String)'),
-        dict( name = 'OnWebServerRealResource', description = 'Es wurde eine Anfrage an den Webserver gestellt, die auf eine reale Resource zeigt (z.B. User ruft das Dashboard auf)'),
+        dict( name = 'OnWebServerStart', description = 'The web server is started, so the web services and the web interface are available By default, port 80 is used (Parameter ip and port)'),
+        dict( name = 'OnWebServerStop', description = 'The web server should be stopped, from this point on no new requests will be processed.'),
+        dict( name = 'WebServerCreateNewSession', description = 'A user who has logged in since the start of DoorPi has logged in.'),
+        dict( name = 'WebServerAuthUnknownUser', description = 'An attempt was made to log in with a user who is not known.'),
+        dict( name = 'WebServerAuthWrongPassword', description = 'An incorrect password was sent for an existing user.'),
+        dict( name = 'OnWebServerRequest', description = 'A request has been made to the web server - whether by GET or POST'),
+        dict( name = 'OnWebServerRequestGet', description = 'A GET request was made to the web server'),
+        dict( name = 'OnWebServerRequestPost', description = 'A POST request has been made to the web server'),
+        dict( name = 'OnWebServerVirtualResource', description = 'A request has been made to the web server pointing to a virtual resource (e.g., webservice requires JSON string)'),
+        dict( name = 'OnWebServerRealResource', description = 'A request has been made to the web server pointing to a real resource (e.g., user is calling the dashboard)'),
     ],
     configuration = [
-        dict( section = DOORPIWEB_SECTION, key = 'ip', type = 'string', default = '', mandatory = False, description = 'IP-Adresse an die der Webserver gebunden werden soll (leer = alle)'),
-        dict( section = DOORPIWEB_SECTION, key = 'port', type = 'integer', default = '80', mandatory = False, description = 'Der Port auf den der Webserver lauschen soll. Achtung - kann bei anderen installierten Webservern zu Kollisionen führen!'),
-        dict( section = DOORPIWEB_SECTION, key = 'www', type = 'string', default = '!BASEPATH!/../DoorPiWeb', mandatory = False, description = 'Ablageort der Dateien, die für reale Resourcen genutzt werden soll. Wenn diese nicht gefunden werden wird automatisch der Online-Fallback genutzt.'),
-        dict( section = DOORPIWEB_SECTION, key = 'indexfile', type = 'string', default = 'index.html', mandatory = False, description = '[nicht eingebunden]'),
-        dict( section = DOORPIWEB_SECTION, key = 'loginfile', type = 'string', default = 'login.html', mandatory = False, description = 'Achtung: veraltet! Der Name der Login-Datei, die angezeigt werden soll, wenn keine gültige Authentifizierung vorliegt.'),
-        dict( section = DOORPIWEB_SECTION, key = 'public', type = 'string', default = 'AREA_public', mandatory = False, description = 'Der Name der Public Sektion mit allen öffentlich aufrufbaren Resourcen (z.B. JS- und CSS-Dateien fürs Dashbaord)'),
-        dict( section = DOORPIWEB_SECTION, key = 'online_fallback', type = 'string', default = 'http://RowanZee.github.io/DoorPiWeb', mandatory = False, description = 'Die Adresse zum Online-Fallback - von hier werden die Daten geladen wenn diese lokal nicht gefunden wurden.'),
-        dict( section = 'User', key = '*', type = 'string', default = '', mandatory = False, description = 'Sektion, die alle Benutzer beinhaltet - in der Form [username] = [password]'),
-        dict( section = 'Group', key = '*', type = 'string', default = '', mandatory = False, description = 'Sektion die alle Gruppen und deren Mitglieder beinhaltet. Mehrere Nutzer werden durch ein Komma getrennt - in der Form [groupname] = [user1],[user2],...'),
+        dict( section = DOORPIWEB_SECTION, key = 'ip', type = 'string', default = '', mandatory = False, description = 'IP address to which the web server is to be bound (empty = all)'),
+        dict( section = DOORPIWEB_SECTION, key = 'port', type = 'integer', default = '80', mandatory = False, description = 'The port on which the web server should listen. Attention - can lead to collisions with other installed web servers!'),
+        dict( section = DOORPIWEB_SECTION, key = 'www', type = 'string', default = '!BASEPATH!/../DoorPiWeb', mandatory = False, description = 'Location of the files to be used for real resources. If these are not found, the online fallback is automatically used.'),
+        dict( section = DOORPIWEB_SECTION, key = 'indexfile', type = 'string', default = 'index.html', mandatory = False, description = '[not involved]'),
+        dict( section = DOORPIWEB_SECTION, key = 'loginfile', type = 'string', default = 'login.html', mandatory = False, description = 'Attention: outdated! The name of the login file to be displayed if there is no valid authentication.'),
+        dict( section = DOORPIWEB_SECTION, key = 'public', type = 'string', default = 'AREA_public', mandatory = False, description = 'The name of the Public section with all publicly invokable resources (for example JS and CSS files for the Dashbaord)'),
+        dict( section = DOORPIWEB_SECTION, key = 'online_fallback', type = 'string', default = 'http://RowanZee.github.io/DoorPiWeb', mandatory = False, description = 'The address for the online fallback - from here the data are loaded if they were not found locally.'),
+        dict( section = 'User', key = '*', type = 'string', default = '', mandatory = False, description = 'Section that includes all users - in the form [username] = [password]'),
+        dict( section = 'Group', key = '*', type = 'string', default = '', mandatory = False, description = 'Section that includes all groups and their members. Several users are separated by a comma - in the form [groupname] = [user1], [user2], ...'),
         dict( section = 'ReadPermission', key = '*', type = 'string', default = '', mandatory = False, description = ''),
         dict( section = 'WritePermission', key = '*', type = 'string', default = '', mandatory = False, description = ''),
         dict( section = CONF_AREA_PREFIX+'*', key = '*', type = 'string', default = '', mandatory = False, description = '')
@@ -99,13 +99,13 @@ administrator = status, help # Gruppe administrator darf lesend auf die Resource
     libraries = dict(
         BaseHTTPServer = dict(
             text_warning =          '',
-            text_description =      'Das Python-Modul BaseHTTPServer ist mit der Klasse HTTPServer die Grundlage für jeden Webserver.',
-            text_installation =     'Eine Installation ist nicht nötig, da es sich hierbei um eine Python-Standard-Modul handelt.',
+            text_description =      'The Python module BaseHTTPServer with the class HTTPServer is the basis for every web server.',
+            text_installation =     'An installation is not necessary as this is a Python standard module.',
             auto_install =          False,
-            text_test =             'Der Status kann gestestet werden, in dem im Python-Interpreter <code>import BaseHTTPServer</code> eingeben wird.',
+            text_test =             'The status can be tested by entering <code> import BaseHTTPServer </code> in the Python interpreter.',
             text_configuration =    '',
             configuration = [
-                #dict( section = 'DoorPi', key = 'eventlog', type = 'string', default = '!BASEPATH!/conf/eventlog.db', mandatory = False, description = 'Ablageort der SQLLite Datenbank für den Event-Handler.')
+                #dict( section = 'DoorPi', key = 'eventlog', type = 'string', default = '!BASEPATH!/conf/eventlog.db', mandatory = False, description = 'Location of the SQLLite database for the event handler.')
             ],
             text_links = {
                 'docs.python.org': 'https://docs.python.org/2.7/library/basehttpserver.html'
@@ -113,13 +113,13 @@ administrator = status, help # Gruppe administrator darf lesend auf die Resource
         ),
         SocketServer = dict(
             text_warning =          '',
-            text_description =      'Das Python-Modul SocketServer stellt die Klasse ThreadingMixIn bereit, mit dessen Hilfe der Webserver mehrere Anfragen gleichzeitig entgegennehmen und verarbeiten kann.',
-            text_installation =     'Eine Installation ist nicht nötig, da es sich hierbei um eine Python-Standard-Modul handelt.',
+            text_description =      'The Python module SocketServer provides the class ThreadingMixIn, with the help of which the web server can receive and process several requests at the same time.',
+            text_installation =     'An installation is not necessary as this is a Python standard module.',
             auto_install =          False,
-            text_test =             'Der Status kann gestestet werden, in dem im Python-Interpreter <code>import SocketServer</code> eingeben wird.',
+            text_test =             'The status can be tested by entering <code> import SocketServer </code> in the Python interpreter.',
             text_configuration =    '',
             configuration = [
-                #dict( section = 'DoorPi', key = 'eventlog', type = 'string', default = '!BASEPATH!/conf/eventlog.db', mandatory = False, description = 'Ablageort der SQLLite Datenbank für den Event-Handler.')
+                #dict( section = 'DoorPi', key = 'eventlog', type = 'string', default = '!BASEPATH!/conf/eventlog.db', mandatory = False, description = 'Location of the SQLLite database for the event handler.')
             ],
             text_links = {
                 'docs.python.org': 'https://docs.python.org/2.7/library/socketserver.html'
@@ -127,13 +127,13 @@ administrator = status, help # Gruppe administrator darf lesend auf die Resource
         ),
         urlparse = dict(
             text_warning =          '',
-            text_description =      'Das Python-Modul urlparse stellt die beiden Funktionen urlparse und parse_qs zur Verfügung, mit dessen Hilfe die Parameter eine Webserver-Anfrage gesplittet und verarbeitet werden können.',
-            text_installation =     'Eine Installation ist nicht nötig, da es sich hierbei um eine Python-Standard-Modul handelt.',
+            text_description =      'The python module urlparse provides the two functions urlparse and parse_qs, with the help of which the parameters of a web server request can be split and processed.',
+            text_installation =     'An installation is not necessary as this is a Python standard module.',
             auto_install =          False,
-            text_test =             'Der Status kann gestestet werden, in dem im Python-Interpreter <code>import urlparse</code> eingeben wird.',
+            text_test =             'The status can be tested by entering <code> import urlparse </code> in the Python interpreter.',
             text_configuration =    '',
             configuration = [
-                #dict( section = 'DoorPi', key = 'eventlog', type = 'string', default = '!BASEPATH!/conf/eventlog.db', mandatory = False, description = 'Ablageort der SQLLite Datenbank für den Event-Handler.')
+                #dict( section = 'DoorPi', key = 'eventlog', type = 'string', default = '!BASEPATH!/conf/eventlog.db', mandatory = False, description = 'Location of the SQLLite database for the event handler.')
             ],
             text_links = {
                 'docs.python.org': 'https://docs.python.org/2.7/library/urlparse.html'
@@ -141,13 +141,13 @@ administrator = status, help # Gruppe administrator darf lesend auf die Resource
         ),
         urllib2 = dict(
             text_warning =          '',
-            text_description =      'Das Python-Modul urllib2 ermöglicht es, Anfragen an einen Webserver zu stellen. Im DoorPi kommt das einerseits beim Testen des eigenen Webservers (fake_request) und anderseits beim Laden von Quellen aus dem Online-Fallback (load_online_fallback) zum Einsatz.',
-            text_installation =     'Eine Installation ist nicht nötig, da es sich hierbei um eine Python-Standard-Modul handelt.',
+            text_description =      'The python module urllib2 makes it possible to submit requests to a web server. In DoorPi, this is done on the one hand when testing the own web server (fake_request) and on the other hand when loading sources from the online fallback (load_online_fallback).',
+            text_installation =     'An installation is not necessary as this is a Python standard module.',
             auto_install =          False,
-            text_test =             'Der Status kann gestestet werden, in dem im Python-Interpreter <code>import BaseHTTPServer</code> eingeben wird.',
+            text_test =             'The status can be tested by entering <code> import BaseHTTPServer </code> in the Python interpreter.',
             text_configuration =    '',
             configuration = [
-                #dict( section = 'DoorPi', key = 'eventlog', type = 'string', default = '!BASEPATH!/conf/eventlog.db', mandatory = False, description = 'Ablageort der SQLLite Datenbank für den Event-Handler.')
+                #dict( section = 'DoorPi', key = 'eventlog', type = 'string', default = '!BASEPATH!/conf/eventlog.db', mandatory = False, description = 'Location of the SQLLite database for the event handler.')
             ],
             text_links = {
                 'docs.python.org': 'https://docs.python.org/2.7/library/urllib2.html'
@@ -155,19 +155,19 @@ administrator = status, help # Gruppe administrator darf lesend auf die Resource
         ),
         mimetypes = dict(
             text_warning =          '',
-            text_description =      'Das Python-Modul mimetypes ermöglicht die Bestimmung des MIME-Typs anhand von Dateiendungen. Wichtig ist das bei der Entscheidung um Platzhalter innerhalb dieser Datei verarbeitet werden sollen (HTML-Template) oder nicht (z.B. Bilddatei).',
-            text_installation =     'Eine Installation ist nicht nötig, da es sich hierbei um eine Python-Standard-Modul handelt.',
+            text_description =      'The Python module mimetypes allows the determination of the MIME type based on file extensions. The important thing is that when deciding to place wildcards within this file should be processed (HTML template) or not (for example, image file).',
+            text_installation =     'An installation is not necessary as this is a Python standard module.',
             auto_install =          False,
-            text_test =             'Der Status kann gestestet werden, in dem im Python-Interpreter <code>import BaseHTTPServer</code> eingeben wird.',
+            text_test =             'The status can be tested by entering <code> import BaseHTTPServer </code> in the Python interpreter.',
             text_configuration =    '',
             configuration = [
-                #dict( section = 'DoorPi', key = 'eventlog', type = 'string', default = '!BASEPATH!/conf/eventlog.db', mandatory = False, description = 'Ablageort der SQLLite Datenbank für den Event-Handler.')
+                #dict( section = 'DoorPi', key = 'eventlog', type = 'string', default = '!BASEPATH!/conf/eventlog.db', mandatory = False, description = 'Location of the SQLLite database for the event handler.')
             ],
             text_links = {
                 'docs.python.org': 'https://docs.python.org/2.7/library/mimetypes.html',
                 'MIME-Typen': 'http://wiki.selfhtml.org/wiki/Referenz:MIME-Typen',
-                'Media Types auf iana.org': 'http://www.iana.org/assignments/media-types/media-types.xhtml',
-                'RFC2616  - Abschnitt 14.17': 'https://tools.ietf.org/html/rfc2616#section-14.17'
+                'Media Types on iana.org': 'http://www.iana.org/assignments/media-types/media-types.xhtml',
+                'RFC2616  - Section 14.17': 'https://tools.ietf.org/html/rfc2616#section-14.17'
             }
         )
     )
